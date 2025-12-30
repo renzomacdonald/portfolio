@@ -1,240 +1,249 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Renzo Macdonald — Portfolio</title>
-  <meta name="description" content="Marketing & Communications / Visual Content portfolio — Renzo Macdonald." />
+  <meta name="description" content="Renzo Macdonald — portfolio." />
+
+  <!-- Nice, clean font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 
   <style>
     :root{
       --bg: #0b0c10;
       --panel: rgba(255,255,255,.06);
-      --stroke: rgba(255,255,255,.10);
+      --stroke: rgba(255,255,255,.12);
       --text: rgba(255,255,255,.92);
       --muted: rgba(255,255,255,.70);
       --soft: rgba(255,255,255,.55);
-      --accent: #D694D4; /* you can change this */
-      --max: 1080px;
-      --radius: 18px;
+
+      --max: 1040px;
+      --r: 18px;
+      --shadow: 0 20px 70px rgba(0,0,0,.35);
+
+      /* Accent colours for each slide (you can change) */
+      --c-mackelvie: #D694D4;
+      --c-wwf: #7CCB8A;
+      --c-personal: #78A0FF;
     }
 
-    *{ box-sizing:border-box; }
-    html{ scroll-behavior:smooth; }
+    *{ box-sizing: border-box; }
+    html{ scroll-behavior: smooth; }
     body{
       margin:0;
-      font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, Arial, sans-serif;
-      background: radial-gradient(1000px 600px at 20% 0%, rgba(214,148,212,.18), transparent 55%),
-                  radial-gradient(900px 700px at 90% 10%, rgba(120,160,255,.14), transparent 60%),
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: radial-gradient(1100px 600px at 15% 0%, rgba(214,148,212,.18), transparent 55%),
+                  radial-gradient(900px 700px at 92% 10%, rgba(120,160,255,.14), transparent 60%),
                   var(--bg);
       color: var(--text);
       line-height: 1.6;
     }
 
-    a{ color: inherit; text-decoration: none; }
-    a.underline{ text-decoration: underline; text-decoration-color: rgba(255,255,255,.35); }
-    a.underline:hover{ text-decoration-color: rgba(255,255,255,.8); }
+    /* Slide / page feel */
+    main{
+      scroll-snap-type: y mandatory;
+    }
+    section{
+      min-height: 100vh;
+      scroll-snap-align: start;
+      scroll-snap-stop: always;
+      display: flex;
+      align-items: center;
+      padding: 36px 16px;
+    }
+    .wrap{
+      width: 100%;
+      max-width: var(--max);
+      margin: 0 auto;
+    }
 
-    /* layout */
-    .wrap{ max-width: var(--max); margin: 0 auto; padding: 28px 18px 90px; }
-    .nav{
-      position: sticky; top: 0;
-      z-index: 50;
-      backdrop-filter: blur(10px);
-      background: linear-gradient(to bottom, rgba(11,12,16,.75), rgba(11,12,16,.20));
-      border-bottom: 1px solid rgba(255,255,255,.06);
-    }
-    .nav-inner{
-      max-width: var(--max); margin: 0 auto;
-      display:flex; align-items:center; justify-content:space-between;
-      padding: 14px 18px;
-    }
-    .brand{
-      display:flex; gap:10px; align-items:center;
-      letter-spacing: .2px;
-      font-weight: 600;
-    }
-    .dot{
-      width:10px; height:10px; border-radius:999px;
-      background: var(--accent);
-      box-shadow: 0 0 0 6px rgba(214,148,212,.18);
-    }
-    .nav-links{
-      display:flex; gap: 14px; align-items:center;
-      font-size: 14px; color: var(--muted);
-    }
-    .nav-links a{
-      padding: 8px 10px;
-      border-radius: 999px;
-      border: 1px solid transparent;
-    }
-    .nav-links a:hover{
-      color: var(--text);
-      border-color: rgba(255,255,255,.12);
+    /* Top “cover” panel like your mockup */
+    .cover{
+      border: 1px solid var(--stroke);
       background: rgba(255,255,255,.04);
+      border-radius: var(--r);
+      box-shadow: var(--shadow);
+      padding: 24px;
+      position: relative;
+      overflow: hidden;
+    }
+    .cover::before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background: linear-gradient(120deg, rgba(255,255,255,.10), transparent 35%, rgba(255,255,255,.06));
+      pointer-events:none;
+      opacity:.7;
+    }
+    .cover > *{ position: relative; }
+
+    .name-row{
+      display:flex;
+      align-items:center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+    .name{
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      font-size: 20px;
     }
 
-    /* hero */
-    .hero{
-      padding: 56px 0 22px;
-      display:grid;
-      grid-template-columns: 1.3fr .7fr;
-      gap: 20px;
-      align-items: start;
+    /* pill buttons */
+    .pills{
+      display:flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin: 10px 0 18px;
     }
-    .hero h1{
-      margin:0 0 12px;
-      font-size: clamp(34px, 5vw, 58px);
-      line-height: 1.05;
-      letter-spacing: -0.02em;
-    }
-    .kicker{
-      color: var(--muted);
-      font-size: 15px;
-      margin-bottom: 14px;
-    }
-    .lead{
-      margin: 0 0 18px;
-      font-size: 17px;
-      color: var(--text);
-      max-width: 52ch;
-    }
-    .cta-row{ display:flex; gap: 12px; flex-wrap: wrap; }
-    .btn{
-      display:inline-flex; align-items:center; gap:10px;
-      padding: 11px 14px;
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding: 10px 16px;
       border-radius: 999px;
       border: 1px solid rgba(255,255,255,.14);
-      background: rgba(255,255,255,.04);
+      background: rgba(255,255,255,.05);
       color: var(--text);
+      font-weight: 600;
       font-size: 14px;
+      text-decoration: none;
+      transition: transform .15s ease, background .15s ease, border-color .15s ease;
     }
-    .btn:hover{ background: rgba(255,255,255,.07); border-color: rgba(255,255,255,.20); }
-    .btn.primary{
-      background: rgba(214,148,212,.16);
-      border-color: rgba(214,148,212,.40);
-    }
-    .btn.primary:hover{
-      background: rgba(214,148,212,.22);
-      border-color: rgba(214,148,212,.55);
-    }
-    .hero-card{
-      border: 1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.04);
-      border-radius: var(--radius);
-      padding: 16px;
-    }
-    .hero-card h3{ margin: 0 0 8px; font-size: 14px; color: var(--muted); font-weight: 600; }
-    .pill-grid{ display:flex; flex-wrap: wrap; gap: 8px; }
-    .pill{
-      font-size: 12px;
-      color: rgba(255,255,255,.82);
-      padding: 7px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.03);
+    .pill:hover{
+      transform: translateY(-1px);
+      background: rgba(255,255,255,.08);
+      border-color: rgba(255,255,255,.22);
     }
 
-    /* sections */
-    section{ padding: 34px 0; }
-    .section-title{
-      display:flex; align-items:flex-end; justify-content:space-between;
-      gap: 12px;
-      margin-bottom: 16px;
+    /* Center card in cover */
+    .center-card{
+      max-width: 520px;
+      margin: 0 auto;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+      border-radius: 14px;
+      padding: 18px;
+      text-align: center;
     }
-    h2{
-      margin:0;
-      font-size: 22px;
-      letter-spacing: -0.01em;
+    .center-card h1{
+      margin: 0 0 10px;
+      font-size: clamp(24px, 4vw, 34px);
+      letter-spacing: -0.03em;
+      line-height: 1.1;
     }
-    .sub{
-      margin:0;
+    .center-card p{
+      margin: 0;
       color: var(--muted);
       font-size: 14px;
     }
 
-    /* cards + grids */
-    .grid{
-      display:grid;
-      grid-template-columns: repeat(12, 1fr);
-      gap: 14px;
+    /* tiny contact in bottom like your mockup */
+    .mini-contact{
+      margin-top: 14px;
+      display:flex;
+      justify-content:center;
+      gap: 10px;
+      flex-wrap: wrap;
+      color: var(--soft);
+      font-size: 13px;
     }
-    .card{
-      grid-column: span 12;
-      border: 1px solid rgba(255,255,255,.10);
+    .mini-contact a{
+      color: rgba(255,255,255,.78);
+      text-decoration: underline;
+      text-decoration-color: rgba(255,255,255,.25);
+    }
+    .mini-contact a:hover{
+      text-decoration-color: rgba(255,255,255,.65);
+    }
+
+    /* Project “slide” cards */
+    .slide{
+      border: 1px solid var(--stroke);
       background: rgba(255,255,255,.04);
-      border-radius: var(--radius);
-      overflow:hidden;
+      border-radius: var(--r);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      display:grid;
+      grid-template-columns: 10px 1fr;
+      min-height: 72vh;
     }
-    .card-inner{ padding: 16px; }
+    .bar{ background: var(--c-mackelvie); }
+    .content{
+      padding: 22px;
+      display:grid;
+      grid-template-rows: auto auto 1fr auto;
+      gap: 12px;
+    }
+    .title{
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      font-size: clamp(26px, 4vw, 40px);
+      margin: 0;
+      line-height: 1.05;
+    }
+    .desc{
+      margin: 0;
+      color: var(--muted);
+      max-width: 70ch;
+    }
+
     .meta{
-      display:flex; flex-wrap:wrap; gap: 8px;
-      margin-top: 12px;
+      display:flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 2px;
     }
     .tag{
       font-size: 12px;
       color: rgba(255,255,255,.74);
-      padding: 6px 10px;
+      padding: 7px 10px;
       border-radius: 999px;
-      border: 1px solid rgba(255,255,255,.10);
+      border: 1px solid rgba(255,255,255,.12);
       background: rgba(255,255,255,.03);
-    }
-    .card h3{ margin:0 0 6px; font-size: 18px; }
-    .card p{ margin: 0; color: var(--muted); }
-
-    .media{
-      width:100%;
-      aspect-ratio: 16/9;
-      background: linear-gradient(135deg, rgba(214,148,212,.18), rgba(120,160,255,.10));
-      border-bottom: 1px solid rgba(255,255,255,.08);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      color: rgba(255,255,255,.65);
-      font-size: 13px;
-    }
-    .media img{
-      width:100%;
-      height:100%;
-      object-fit: cover;
-      display:block;
     }
 
     .gallery{
       display:grid;
       grid-template-columns: repeat(12, 1fr);
       gap: 12px;
-      margin-top: 14px;
+      margin-top: 8px;
     }
     .shot{
       grid-column: span 12;
+      border: 1px solid rgba(255,255,255,.12);
       border-radius: 14px;
       overflow:hidden;
-      border: 1px solid rgba(255,255,255,.10);
       background: rgba(255,255,255,.03);
+      aspect-ratio: 16/9;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color: rgba(255,255,255,.55);
+      font-size: 13px;
     }
     .shot img{
       width:100%;
       height:100%;
-      display:block;
       object-fit: cover;
+      display:block;
     }
 
-    /* two-column responsive */
-    @media (min-width: 860px){
-      .card.half{ grid-column: span 6; }
-      .shot.third{ grid-column: span 4; }
+    @media (min-width: 900px){
       .shot.half{ grid-column: span 6; }
-    }
-    @media (max-width: 860px){
-      .hero{ grid-template-columns: 1fr; }
+      .shot.third{ grid-column: span 4; }
     }
 
-    /* subtle scroll animations */
+    /* Subtle fade / slide in */
     .reveal{
       opacity: 0;
       transform: translateY(14px);
-      transition: opacity .7s ease, transform .7s ease;
+      transition: opacity .75s ease, transform .75s ease;
       will-change: opacity, transform;
     }
     .reveal.on{
@@ -242,238 +251,242 @@
       transform: translateY(0);
     }
 
-    /* footer */
-    footer{
-      padding-top: 22px;
-      border-top: 1px solid rgba(255,255,255,.08);
-      margin-top: 40px;
-      color: var(--muted);
-      font-size: 14px;
+    /* Small footer */
+    .footer{
+      margin-top: 14px;
       display:flex;
-      gap: 10px;
-      flex-wrap: wrap;
       justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      color: var(--soft);
+      font-size: 13px;
     }
+    .footer a{ color: rgba(255,255,255,.78); text-decoration: underline; text-decoration-color: rgba(255,255,255,.25); }
+    .footer a:hover{ text-decoration-color: rgba(255,255,255,.65); }
   </style>
 </head>
 
 <body>
-  <div class="nav">
-    <div class="nav-inner">
-      <div class="brand"><span class="dot"></span> Renzo Macdonald</div>
-      <div class="nav-links">
-        <a href="#work">Work</a>
-        <a href="#tools">Tools</a>
-        <a href="#about">About</a>
-        <a class="underline" href="#contact">Contact</a>
-      </div>
-    </div>
-  </div>
+  <main>
 
-  <div class="wrap">
-
-    <!-- HERO -->
-    <div class="hero">
-      <div class="reveal">
-        <div class="kicker">Marketing & Communications / Visual Content</div>
-        <h1>Content, design, and storytelling — built for real audiences.</h1>
-        <p class="lead">
-          I’m a visual and communications creative interested in how content, design, and storytelling come together across digital platforms.
-          I focus on clarity, consistency, and audience engagement — from concept through to execution.
-        </p>
-        <div class="cta-row">
-          <a class="btn primary" href="#work">View selected work</a>
-          <a class="btn" href="#contact">Contact</a>
-        </div>
-      </div>
-
-      <div class="hero-card reveal">
-        <h3>Strengths</h3>
-        <div class="pill-grid">
-          <div class="pill">Campaign concepts</div>
-          <div class="pill">Social video</div>
-          <div class="pill">Information design</div>
-          <div class="pill">Content planning</div>
-          <div class="pill">Copy + captions</div>
-          <div class="pill">Basic analytics reporting</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- WORK -->
-    <section id="work">
-      <div class="section-title">
-        <h2 class="reveal">Selected work</h2>
-        <p class="sub reveal">Scroll for projects, outcomes, and visuals.</p>
-      </div>
-
-      <div class="grid">
-        <!-- Project 1 -->
-        <article class="card half reveal">
-          <div class="media">
-            <!-- Replace with your image file -->
-            <img src="assets/images/mackelvie-hero.jpg" alt="Mackelvie Student Team project visual" onerror="this.remove(); this.parentElement.textContent='Add: assets/images/mackelvie-hero.jpg';">
+    <!-- COVER -->
+    <section id="top">
+      <div class="wrap">
+        <div class="cover reveal">
+          <div class="name-row">
+            <div class="name">Renzo Macdonald</div>
+            <div style="color:var(--soft);font-size:13px;">Portfolio</div>
           </div>
-          <div class="card-inner">
-            <h3>Mackelvie Society x University of Auckland (2025)</h3>
+
+          <div class="pills">
+            <a class="pill" href="#projects">Projects</a>
+            <a class="pill" href="#tools">Tools</a>
+          </div>
+
+          <div class="center-card">
+            <h1>Marketing & Communications / Visual Content</h1>
             <p>
-              A multi-platform content project combining video, written content, and visual design to engage a younger audience.
+              Clean, audience-first work across posters, social content, and campaign concepts.
+              Scroll down for projects.
             </p>
+          </div>
+
+          <div class="mini-contact">
+            <span>Contact:</span>
+            <a href="mailto:YOUR_EMAIL_HERE">YOUR_EMAIL_HERE</a>
+            <span>·</span>
+            <a href="YOUR_LINKEDIN_HERE" target="_blank" rel="noopener">LinkedIn</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects">
+      <div class="wrap">
+        <div class="slide reveal">
+          <div class="bar" style="background: var(--c-mackelvie);"></div>
+          <div class="content">
+            <h2 class="title">Mackelvie</h2>
+
+            <p class="desc">
+              Multi-platform content project combining video, written content, and design to engage a younger audience.
+              (Replace this with your final wording.)
+            </p>
+
             <div class="meta">
-              <span class="tag">Content direction</span>
-              <span class="tag">Content calendar</span>
-              <span class="tag">Editing: long + short form</span>
-              <span class="tag">Captions + copy</span>
+              <span class="tag">Short-form video</span>
               <span class="tag">Posters</span>
+              <span class="tag">Copy + captions</span>
+              <span class="tag">Content planning</span>
             </div>
-            <p style="margin-top:12px;color:var(--soft);font-size:13px;">
-              Outcome: 11 short-form videos, 1 long-form video (visual podcast style), board video, posters, and a published article.
-            </p>
 
             <div class="gallery">
+              <!-- Replace filenames with your uploads in assets/images/ -->
               <div class="shot half">
-                <img src="assets/images/mackelvie-poster-1.jpg" alt="Mackelvie poster" onerror="this.style.display='none'">
+                <img src="assets/images/mackelvie-1.jpg" alt="Mackelvie visual 1"
+                     onerror="this.remove(); this.parentElement.textContent='Add image: assets/images/mackelvie-1.jpg';">
               </div>
               <div class="shot half">
-                <img src="assets/images/mackelvie-poster-2.jpg" alt="Mackelvie poster 2" onerror="this.style.display='none'">
+                <img src="assets/images/mackelvie-2.jpg" alt="Mackelvie visual 2"
+                     onerror="this.remove(); this.parentElement.textContent='Add image: assets/images/mackelvie-2.jpg';">
+              </div>
+              <div class="shot third">
+                <img src="assets/images/mackelvie-3.jpg" alt="Mackelvie visual 3"
+                     onerror="this.remove(); this.parentElement.textContent='Optional: assets/images/mackelvie-3.jpg';">
+              </div>
+              <div class="shot third">
+                <img src="assets/images/mackelvie-4.jpg" alt="Mackelvie visual 4"
+                     onerror="this.remove(); this.parentElement.textContent='Optional: assets/images/mackelvie-4.jpg';">
+              </div>
+              <div class="shot third">
+                <img src="assets/images/mackelvie-5.jpg" alt="Mackelvie visual 5"
+                     onerror="this.remove(); this.parentElement.textContent='Optional: assets/images/mackelvie-5.jpg';">
               </div>
             </div>
-          </div>
-        </article>
 
-        <!-- Project 2 -->
-        <article class="card half reveal">
-          <div class="media">
-            <img src="assets/images/wwf-hero.jpg" alt="WWF concept campaign visual" onerror="this.remove(); this.parentElement.textContent='Add: assets/images/wwf-hero.jpg';">
+            <div class="footer">
+              <span>Scroll for next project</span>
+              <a href="#tools">Jump to Tools</a>
+            </div>
           </div>
-          <div class="card-inner">
-            <h3>WWF Youth Campaign Concept</h3>
-            <p>
-              A conceptual campaign tapping into youth travel and experience-based trends — reimagining wildlife adoption through guided tours and conservation-led exploration.
+        </div>
+      </div>
+    </section>
+
+    <!-- WWF -->
+    <section id="wwf">
+      <div class="wrap">
+        <div class="slide reveal">
+          <div class="bar" style="background: var(--c-wwf);"></div>
+          <div class="content">
+            <h2 class="title">WWF</h2>
+
+            <p class="desc">
+              Campaign concept aimed at youth — reimagining adoption through experience-based conservation tours.
+              (Replace with your final summary.)
             </p>
+
             <div class="meta">
-              <span class="tag">Concept + strategy</span>
-              <span class="tag">Visual direction</span>
-              <span class="tag">Brand system</span>
+              <span class="tag">Campaign concept</span>
+              <span class="tag">Brand direction</span>
+              <span class="tag">Poster design</span>
               <span class="tag">Mockups</span>
             </div>
-            <p style="margin-top:12px;color:var(--soft);font-size:13px;">
-              Outcome: a cohesive campaign system designed to extend across posters, digital assets, and physical memorabilia.
-            </p>
 
             <div class="gallery">
-              <div class="shot third">
-                <img src="assets/images/wwf-poster-1.jpg" alt="WWF poster mockup" onerror="this.style.display='none'">
+              <div class="shot half">
+                <img src="assets/images/wwf-1.jpg" alt="WWF visual 1"
+                     onerror="this.remove(); this.parentElement.textContent='Add image: assets/images/wwf-1.jpg';">
+              </div>
+              <div class="shot half">
+                <img src="assets/images/wwf-2.jpg" alt="WWF visual 2"
+                     onerror="this.remove(); this.parentElement.textContent='Add image: assets/images/wwf-2.jpg';">
               </div>
               <div class="shot third">
-                <img src="assets/images/wwf-poster-2.jpg" alt="WWF poster mockup 2" onerror="this.style.display='none'">
+                <img src="assets/images/wwf-3.jpg" alt="WWF visual 3"
+                     onerror="this.remove(); this.parentElement.textContent='Optional: assets/images/wwf-3.jpg';">
               </div>
               <div class="shot third">
-                <img src="assets/images/wwf-mockup-1.jpg" alt="WWF merch/mockup" onerror="this.style.display='none'">
+                <img src="assets/images/wwf-4.jpg" alt="WWF visual 4"
+                     onerror="this.remove(); this.parentElement.textContent='Optional: assets/images/wwf-4.jpg';">
+              </div>
+              <div class="shot third">
+                <img src="assets/images/wwf-5.jpg" alt="WWF visual 5"
+                     onerror="this.remove(); this.parentElement.textContent='Optional: assets/images/wwf-5.jpg';">
               </div>
             </div>
+
+            <div class="footer">
+              <a href="#projects">Back to Projects</a>
+              <a href="#tools">Tools</a>
+            </div>
           </div>
-        </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- PERSONAL (placeholder like your sketch) -->
+    <section id="personal">
+      <div class="wrap">
+        <div class="slide reveal">
+          <div class="bar" style="background: var(--c-personal);"></div>
+          <div class="content">
+            <h2 class="title">Personal</h2>
+
+            <p class="desc">
+              Add any personal work here (photography, social edits, projects, etc.).
+              You can duplicate this whole section to add more slides.
+            </p>
+
+            <div class="meta">
+              <span class="tag">Personal brand</span>
+              <span class="tag">Experiments</span>
+              <span class="tag">Side projects</span>
+            </div>
+
+            <div class="gallery">
+              <div class="shot half">Add image: assets/images/personal-1.jpg</div>
+              <div class="shot half">Add image: assets/images/personal-2.jpg</div>
+            </div>
+
+            <div class="footer">
+              <a href="#tools">Jump to Tools</a>
+              <a href="#top">Back to top</a>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
     <!-- TOOLS -->
     <section id="tools">
-      <div class="section-title">
-        <h2 class="reveal">Tools & platforms</h2>
-        <p class="sub reveal">Tools are part of the wider communication process.</p>
-      </div>
+      <div class="wrap">
+        <div class="slide reveal">
+          <div class="bar" style="background: rgba(255,255,255,.35);"></div>
+          <div class="content">
+            <h2 class="title">Tools</h2>
 
-      <div class="grid">
-        <div class="card half reveal">
-          <div class="card-inner">
-            <h3>Static content & design</h3>
-            <p>Add your exact tools here (e.g., Photoshop, Illustrator, InDesign, Figma, Canva, etc.).</p>
-            <div class="meta">
-              <span class="tag">Design systems</span>
-              <span class="tag">Information design</span>
-              <span class="tag">Posters</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="card half reveal">
-          <div class="card-inner">
-            <h3>Video & social</h3>
-            <p>Add your tools here (e.g., Premiere Pro, After Effects, CapCut, TikTok, Meta tools, etc.).</p>
-            <div class="meta">
-              <span class="tag">Short-form editing</span>
-              <span class="tag">Long-form editing</span>
-              <span class="tag">Captions</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="card reveal">
-          <div class="card-inner">
-            <h3>Tools in practice</h3>
-            <p>
-              I support content planning, communication, and performance tracking. I’m familiar with platform insights (e.g., TikTok Analytics and Meta Insights)
-              and have working knowledge of Google Analytics for basic reporting. I’m comfortable supporting email communications (Mailchimp), contributing to content calendars,
-              and adapting messaging across platforms.
+            <p class="desc">
+              Replace these with your real tools. Keep it tight and believable.
             </p>
+
+            <div class="meta">
+              <span class="tag">Photoshop</span>
+              <span class="tag">Illustrator</span>
+              <span class="tag">InDesign</span>
+              <span class="tag">Premiere Pro</span>
+              <span class="tag">CapCut</span>
+              <span class="tag">Figma / Canva</span>
+            </div>
+
+            <div class="center-card" style="text-align:left;max-width:680px;">
+              <h1 style="font-size:18px;margin:0 0 10px;font-weight:700;">Contact</h1>
+              <p style="margin:0;color:var(--muted);font-size:14px;">
+                Email:
+                <a href="mailto:YOUR_EMAIL_HERE" style="color:rgba(255,255,255,.88);text-decoration:underline;">YOUR_EMAIL_HERE</a>
+                <br/>
+                LinkedIn:
+                <a href="YOUR_LINKEDIN_HERE" target="_blank" rel="noopener"
+                   style="color:rgba(255,255,255,.88);text-decoration:underline;">YOUR_LINKEDIN_HERE</a>
+              </p>
+            </div>
+
+            <div class="footer">
+              <span>© <span id="year"></span> Renzo Macdonald</span>
+              <a href="#top">Back to top</a>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ABOUT -->
-    <section id="about">
-      <div class="section-title">
-        <h2 class="reveal">About</h2>
-        <p class="sub reveal">Short, clear, and employer-friendly.</p>
-      </div>
-
-      <div class="card reveal">
-        <div class="card-inner">
-          <p>
-            I’m a visual and communications creative who enjoys developing ideas from concept through to execution.
-            I’m interested in joining a marketing or communications team where I can support content production, campaign delivery,
-            and consistent brand storytelling across channels.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- CONTACT -->
-    <section id="contact">
-      <div class="section-title">
-        <h2 class="reveal">Contact</h2>
-        <p class="sub reveal">Make it easy to reach you.</p>
-      </div>
-
-      <div class="card reveal">
-        <div class="card-inner">
-          <p style="margin-bottom:10px;">Email is best:</p>
-          <div class="cta-row">
-            <a class="btn primary" href="mailto:YOUR_EMAIL_HERE">Email me</a>
-            <a class="btn" href="YOUR_LINKEDIN_HERE" target="_blank" rel="noopener">LinkedIn</a>
-            <a class="btn" href="YOUR_INSTAGRAM_OR_TIKTOK_HERE" target="_blank" rel="noopener">Social</a>
-          </div>
-          <p style="margin-top:12px;color:var(--soft);font-size:13px;">
-            Tip: replace the placeholders above with your real links.
-          </p>
-        </div>
-      </div>
-
-      <footer>
-        <div>© <span id="year"></span> Renzo Macdonald</div>
-        <div><a class="underline" href="#work">Back to top</a></div>
-      </footer>
-    </section>
-
-  </div>
+  </main>
 
   <script>
-    // Year
     document.getElementById("year").textContent = new Date().getFullYear();
 
-    // Reveal on scroll (subtle)
+    // Subtle fade in on scroll
     const els = document.querySelectorAll(".reveal");
     const io = new IntersectionObserver((entries) => {
       entries.forEach(e => {
