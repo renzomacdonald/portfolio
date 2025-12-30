@@ -1,69 +1,487 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Renzo Macdonald</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Renzo Macdonald — Portfolio</title>
+  <meta name="description" content="Marketing & Communications / Visual Content portfolio — Renzo Macdonald." />
+
   <style>
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, sans-serif;
-      margin: 0;
-      padding: 0;
-      background: #ffffff;
-      color: #111;
+    :root{
+      --bg: #0b0c10;
+      --panel: rgba(255,255,255,.06);
+      --stroke: rgba(255,255,255,.10);
+      --text: rgba(255,255,255,.92);
+      --muted: rgba(255,255,255,.70);
+      --soft: rgba(255,255,255,.55);
+      --accent: #D694D4; /* you can change this */
+      --max: 1080px;
+      --radius: 18px;
     }
-    .container {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 80px 24px;
-    }
-    h1 {
-      font-size: 3rem;
-      margin-bottom: 0.5rem;
-    }
-    p {
-      font-size: 1.1rem;
+
+    *{ box-sizing:border-box; }
+    html{ scroll-behavior:smooth; }
+    body{
+      margin:0;
+      font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, Arial, sans-serif;
+      background: radial-gradient(1000px 600px at 20% 0%, rgba(214,148,212,.18), transparent 55%),
+                  radial-gradient(900px 700px at 90% 10%, rgba(120,160,255,.14), transparent 60%),
+                  var(--bg);
+      color: var(--text);
       line-height: 1.6;
-      max-width: 600px;
     }
-    .projects {
-      margin-top: 64px;
+
+    a{ color: inherit; text-decoration: none; }
+    a.underline{ text-decoration: underline; text-decoration-color: rgba(255,255,255,.35); }
+    a.underline:hover{ text-decoration-color: rgba(255,255,255,.8); }
+
+    /* layout */
+    .wrap{ max-width: var(--max); margin: 0 auto; padding: 28px 18px 90px; }
+    .nav{
+      position: sticky; top: 0;
+      z-index: 50;
+      backdrop-filter: blur(10px);
+      background: linear-gradient(to bottom, rgba(11,12,16,.75), rgba(11,12,16,.20));
+      border-bottom: 1px solid rgba(255,255,255,.06);
     }
-    .project {
-      margin-bottom: 32px;
+    .nav-inner{
+      max-width: var(--max); margin: 0 auto;
+      display:flex; align-items:center; justify-content:space-between;
+      padding: 14px 18px;
     }
-    a {
-      color: #111;
-      text-decoration: underline;
+    .brand{
+      display:flex; gap:10px; align-items:center;
+      letter-spacing: .2px;
+      font-weight: 600;
+    }
+    .dot{
+      width:10px; height:10px; border-radius:999px;
+      background: var(--accent);
+      box-shadow: 0 0 0 6px rgba(214,148,212,.18);
+    }
+    .nav-links{
+      display:flex; gap: 14px; align-items:center;
+      font-size: 14px; color: var(--muted);
+    }
+    .nav-links a{
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+    }
+    .nav-links a:hover{
+      color: var(--text);
+      border-color: rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+    }
+
+    /* hero */
+    .hero{
+      padding: 56px 0 22px;
+      display:grid;
+      grid-template-columns: 1.3fr .7fr;
+      gap: 20px;
+      align-items: start;
+    }
+    .hero h1{
+      margin:0 0 12px;
+      font-size: clamp(34px, 5vw, 58px);
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+    }
+    .kicker{
+      color: var(--muted);
+      font-size: 15px;
+      margin-bottom: 14px;
+    }
+    .lead{
+      margin: 0 0 18px;
+      font-size: 17px;
+      color: var(--text);
+      max-width: 52ch;
+    }
+    .cta-row{ display:flex; gap: 12px; flex-wrap: wrap; }
+    .btn{
+      display:inline-flex; align-items:center; gap:10px;
+      padding: 11px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.04);
+      color: var(--text);
+      font-size: 14px;
+    }
+    .btn:hover{ background: rgba(255,255,255,.07); border-color: rgba(255,255,255,.20); }
+    .btn.primary{
+      background: rgba(214,148,212,.16);
+      border-color: rgba(214,148,212,.40);
+    }
+    .btn.primary:hover{
+      background: rgba(214,148,212,.22);
+      border-color: rgba(214,148,212,.55);
+    }
+    .hero-card{
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+      border-radius: var(--radius);
+      padding: 16px;
+    }
+    .hero-card h3{ margin: 0 0 8px; font-size: 14px; color: var(--muted); font-weight: 600; }
+    .pill-grid{ display:flex; flex-wrap: wrap; gap: 8px; }
+    .pill{
+      font-size: 12px;
+      color: rgba(255,255,255,.82);
+      padding: 7px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.03);
+    }
+
+    /* sections */
+    section{ padding: 34px 0; }
+    .section-title{
+      display:flex; align-items:flex-end; justify-content:space-between;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    h2{
+      margin:0;
+      font-size: 22px;
+      letter-spacing: -0.01em;
+    }
+    .sub{
+      margin:0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    /* cards + grids */
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 14px;
+    }
+    .card{
+      grid-column: span 12;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+      border-radius: var(--radius);
+      overflow:hidden;
+    }
+    .card-inner{ padding: 16px; }
+    .meta{
+      display:flex; flex-wrap:wrap; gap: 8px;
+      margin-top: 12px;
+    }
+    .tag{
+      font-size: 12px;
+      color: rgba(255,255,255,.74);
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.03);
+    }
+    .card h3{ margin:0 0 6px; font-size: 18px; }
+    .card p{ margin: 0; color: var(--muted); }
+
+    .media{
+      width:100%;
+      aspect-ratio: 16/9;
+      background: linear-gradient(135deg, rgba(214,148,212,.18), rgba(120,160,255,.10));
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color: rgba(255,255,255,.65);
+      font-size: 13px;
+    }
+    .media img{
+      width:100%;
+      height:100%;
+      object-fit: cover;
+      display:block;
+    }
+
+    .gallery{
+      display:grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 12px;
+      margin-top: 14px;
+    }
+    .shot{
+      grid-column: span 12;
+      border-radius: 14px;
+      overflow:hidden;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.03);
+    }
+    .shot img{
+      width:100%;
+      height:100%;
+      display:block;
+      object-fit: cover;
+    }
+
+    /* two-column responsive */
+    @media (min-width: 860px){
+      .card.half{ grid-column: span 6; }
+      .shot.third{ grid-column: span 4; }
+      .shot.half{ grid-column: span 6; }
+    }
+    @media (max-width: 860px){
+      .hero{ grid-template-columns: 1fr; }
+    }
+
+    /* subtle scroll animations */
+    .reveal{
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity .7s ease, transform .7s ease;
+      will-change: opacity, transform;
+    }
+    .reveal.on{
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* footer */
+    footer{
+      padding-top: 22px;
+      border-top: 1px solid rgba(255,255,255,.08);
+      margin-top: 40px;
+      color: var(--muted);
+      font-size: 14px;
+      display:flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: space-between;
     }
   </style>
 </head>
+
 <body>
-  <div class="container">
-    <h1>Renzo Macdonald</h1>
-    <p>
-      University student focused on communications, strategy, and digital projects.
-      Interested in content, leadership, and media-driven work.
-    </p>
+  <div class="nav">
+    <div class="nav-inner">
+      <div class="brand"><span class="dot"></span> Renzo Macdonald</div>
+      <div class="nav-links">
+        <a href="#work">Work</a>
+        <a href="#tools">Tools</a>
+        <a href="#about">About</a>
+        <a class="underline" href="#contact">Contact</a>
+      </div>
+    </div>
+  </div>
 
-    <div class="projects">
-      <h2>Selected Work</h2>
+  <div class="wrap">
 
-      <div class="project">
-        <strong>Project Title One</strong>
-        <p>Short description of what you did and why it mattered.</p>
+    <!-- HERO -->
+    <div class="hero">
+      <div class="reveal">
+        <div class="kicker">Marketing & Communications / Visual Content</div>
+        <h1>Content, design, and storytelling — built for real audiences.</h1>
+        <p class="lead">
+          I’m a visual and communications creative interested in how content, design, and storytelling come together across digital platforms.
+          I focus on clarity, consistency, and audience engagement — from concept through to execution.
+        </p>
+        <div class="cta-row">
+          <a class="btn primary" href="#work">View selected work</a>
+          <a class="btn" href="#contact">Contact</a>
+        </div>
       </div>
 
-      <div class="project">
-        <strong>Project Title Two</strong>
-        <p>Another project — uni, team, or personal work is totally fine.</p>
+      <div class="hero-card reveal">
+        <h3>Strengths</h3>
+        <div class="pill-grid">
+          <div class="pill">Campaign concepts</div>
+          <div class="pill">Social video</div>
+          <div class="pill">Information design</div>
+          <div class="pill">Content planning</div>
+          <div class="pill">Copy + captions</div>
+          <div class="pill">Basic analytics reporting</div>
+        </div>
       </div>
     </div>
 
-    <p>
-      <a href="mailto:your@email.com">Email</a> ·
-      <a href="#">LinkedIn</a>
-    </p>
+    <!-- WORK -->
+    <section id="work">
+      <div class="section-title">
+        <h2 class="reveal">Selected work</h2>
+        <p class="sub reveal">Scroll for projects, outcomes, and visuals.</p>
+      </div>
+
+      <div class="grid">
+        <!-- Project 1 -->
+        <article class="card half reveal">
+          <div class="media">
+            <!-- Replace with your image file -->
+            <img src="assets/images/mackelvie-hero.jpg" alt="Mackelvie Student Team project visual" onerror="this.remove(); this.parentElement.textContent='Add: assets/images/mackelvie-hero.jpg';">
+          </div>
+          <div class="card-inner">
+            <h3>Mackelvie Society x University of Auckland (2025)</h3>
+            <p>
+              A multi-platform content project combining video, written content, and visual design to engage a younger audience.
+            </p>
+            <div class="meta">
+              <span class="tag">Content direction</span>
+              <span class="tag">Content calendar</span>
+              <span class="tag">Editing: long + short form</span>
+              <span class="tag">Captions + copy</span>
+              <span class="tag">Posters</span>
+            </div>
+            <p style="margin-top:12px;color:var(--soft);font-size:13px;">
+              Outcome: 11 short-form videos, 1 long-form video (visual podcast style), board video, posters, and a published article.
+            </p>
+
+            <div class="gallery">
+              <div class="shot half">
+                <img src="assets/images/mackelvie-poster-1.jpg" alt="Mackelvie poster" onerror="this.style.display='none'">
+              </div>
+              <div class="shot half">
+                <img src="assets/images/mackelvie-poster-2.jpg" alt="Mackelvie poster 2" onerror="this.style.display='none'">
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 2 -->
+        <article class="card half reveal">
+          <div class="media">
+            <img src="assets/images/wwf-hero.jpg" alt="WWF concept campaign visual" onerror="this.remove(); this.parentElement.textContent='Add: assets/images/wwf-hero.jpg';">
+          </div>
+          <div class="card-inner">
+            <h3>WWF Youth Campaign Concept</h3>
+            <p>
+              A conceptual campaign tapping into youth travel and experience-based trends — reimagining wildlife adoption through guided tours and conservation-led exploration.
+            </p>
+            <div class="meta">
+              <span class="tag">Concept + strategy</span>
+              <span class="tag">Visual direction</span>
+              <span class="tag">Brand system</span>
+              <span class="tag">Mockups</span>
+            </div>
+            <p style="margin-top:12px;color:var(--soft);font-size:13px;">
+              Outcome: a cohesive campaign system designed to extend across posters, digital assets, and physical memorabilia.
+            </p>
+
+            <div class="gallery">
+              <div class="shot third">
+                <img src="assets/images/wwf-poster-1.jpg" alt="WWF poster mockup" onerror="this.style.display='none'">
+              </div>
+              <div class="shot third">
+                <img src="assets/images/wwf-poster-2.jpg" alt="WWF poster mockup 2" onerror="this.style.display='none'">
+              </div>
+              <div class="shot third">
+                <img src="assets/images/wwf-mockup-1.jpg" alt="WWF merch/mockup" onerror="this.style.display='none'">
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- TOOLS -->
+    <section id="tools">
+      <div class="section-title">
+        <h2 class="reveal">Tools & platforms</h2>
+        <p class="sub reveal">Tools are part of the wider communication process.</p>
+      </div>
+
+      <div class="grid">
+        <div class="card half reveal">
+          <div class="card-inner">
+            <h3>Static content & design</h3>
+            <p>Add your exact tools here (e.g., Photoshop, Illustrator, InDesign, Figma, Canva, etc.).</p>
+            <div class="meta">
+              <span class="tag">Design systems</span>
+              <span class="tag">Information design</span>
+              <span class="tag">Posters</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card half reveal">
+          <div class="card-inner">
+            <h3>Video & social</h3>
+            <p>Add your tools here (e.g., Premiere Pro, After Effects, CapCut, TikTok, Meta tools, etc.).</p>
+            <div class="meta">
+              <span class="tag">Short-form editing</span>
+              <span class="tag">Long-form editing</span>
+              <span class="tag">Captions</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card reveal">
+          <div class="card-inner">
+            <h3>Tools in practice</h3>
+            <p>
+              I support content planning, communication, and performance tracking. I’m familiar with platform insights (e.g., TikTok Analytics and Meta Insights)
+              and have working knowledge of Google Analytics for basic reporting. I’m comfortable supporting email communications (Mailchimp), contributing to content calendars,
+              and adapting messaging across platforms.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about">
+      <div class="section-title">
+        <h2 class="reveal">About</h2>
+        <p class="sub reveal">Short, clear, and employer-friendly.</p>
+      </div>
+
+      <div class="card reveal">
+        <div class="card-inner">
+          <p>
+            I’m a visual and communications creative who enjoys developing ideas from concept through to execution.
+            I’m interested in joining a marketing or communications team where I can support content production, campaign delivery,
+            and consistent brand storytelling across channels.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <div class="section-title">
+        <h2 class="reveal">Contact</h2>
+        <p class="sub reveal">Make it easy to reach you.</p>
+      </div>
+
+      <div class="card reveal">
+        <div class="card-inner">
+          <p style="margin-bottom:10px;">Email is best:</p>
+          <div class="cta-row">
+            <a class="btn primary" href="mailto:YOUR_EMAIL_HERE">Email me</a>
+            <a class="btn" href="YOUR_LINKEDIN_HERE" target="_blank" rel="noopener">LinkedIn</a>
+            <a class="btn" href="YOUR_INSTAGRAM_OR_TIKTOK_HERE" target="_blank" rel="noopener">Social</a>
+          </div>
+          <p style="margin-top:12px;color:var(--soft);font-size:13px;">
+            Tip: replace the placeholders above with your real links.
+          </p>
+        </div>
+      </div>
+
+      <footer>
+        <div>© <span id="year"></span> Renzo Macdonald</div>
+        <div><a class="underline" href="#work">Back to top</a></div>
+      </footer>
+    </section>
+
   </div>
+
+  <script>
+    // Year
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Reveal on scroll (subtle)
+    const els = document.querySelectorAll(".reveal");
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) e.target.classList.add("on");
+      });
+    }, { threshold: 0.12 });
+
+    els.forEach(el => io.observe(el));
+  </script>
 </body>
 </html>
